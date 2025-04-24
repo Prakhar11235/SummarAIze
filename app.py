@@ -38,19 +38,19 @@ def main():
     uploaded_file = st.file_uploader("Upload a document (PDF, DOCX, TXT)", type=["pdf", "docx", "txt"])
     
     if uploaded_file:
-        file_path = os.path.join("uploads", uploaded_file.name)
-        os.makedirs("uploads", exist_ok=True)
-        with open(file_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
-        st.success(f"File {uploaded_file.name} uploaded successfully!")
+        # file_path = os.path.join("uploads", uploaded_file.name)
+        # os.makedirs("uploads", exist_ok=True)
+        # with open(file_path, "wb") as f:
+        #     f.write(uploaded_file.getbuffer())
+        # st.success(f"File {uploaded_file.name} uploaded successfully!")
         
         # Load and process the document
-        if file_path.endswith(".pdf"):
-            loader = PyPDFLoader(file_path)
-        elif file_path.endswith(".docx"):
-            loader = Docx2txtLoader(file_path)
-        elif file_path.endswith(".txt"):
-            loader = TextLoader(file_path)
+        if uploaded_file.name.endswith(".pdf"):
+            loader = PyPDFLoader(uploaded_file.name)
+        elif uploaded_file.name.endswith(".docx"):
+            loader = Docx2txtLoader(uploaded_file.name)
+        elif uploaded_file.name.endswith(".txt"):
+            loader = TextLoader(uploaded_file.name)
         else:
             st.error("Unsupported file format.")
             return
